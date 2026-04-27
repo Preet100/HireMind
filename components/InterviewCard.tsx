@@ -57,6 +57,7 @@ const InterviewCard = async ({
                 src="/logo.png"
                 alt="LPU Logo"
                 fill
+                sizes="80px"
                 className="rounded-full object-contain p-1"
               />
             </div>
