@@ -2,7 +2,15 @@ interface Feedback {
   id: string;
   interviewId: string;
   totalScore: number;
-  categoryScores: Array<{
+  maxScore?: number;
+  evaluations?: Array<{
+    question: string;
+    answer: string;
+    isCorrect: boolean;
+    isSkipped?: boolean;
+    feedback: string;
+  }>;
+  categoryScores?: Array<{
     name: string;
     score: number;
     comment: string;
@@ -23,6 +31,7 @@ interface Interview {
   userId: string;
   type: string;
   finalized: boolean;
+  source?: "voice" | "resume"; // distinguishes interview type
 }
 
 interface CreateFeedbackParams {
@@ -41,10 +50,12 @@ interface User {
 interface InterviewCardProps {
   interviewId?: string;
   userId?: string;
+  creatorId?: string;
   role: string;
   type: string;
   techstack: string[];
   createdAt?: string;
+  source?: "voice" | "resume";
 }
 
 interface AgentProps {

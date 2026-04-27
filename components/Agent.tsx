@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { vapi } from "@/lib/vapi.sdk";
 import { interviewer } from "@/constants";
-import { createFeedback } from "@/lib/actions/general.action";
+import { createFeedback, saveVoiceInterview } from "@/lib/actions/general.action";
 
 enum CallStatus {
   INACTIVE = "INACTIVE",
@@ -105,9 +105,26 @@ const Agent = ({
       }
     };
 
+    const handleSaveVoiceInterview = async (messages: SavedMessage[]) => {
+      console.log("handleSaveVoiceInterview");
+
+      const result = await saveVoiceInterview({
+        userId: userId!,
+        userName,
+        transcript: messages,
+      });
+
+      if (result.success && result.interviewId) {
+        router.push(`/interview/${result.interviewId}/feedback`);
+      } else {
+        console.log("Error saving voice interview");
+        router.push("/");
+      }
+    };
+
     if (callStatus === CallStatus.FINISHED) {
       if (type === "generate") {
-        router.push("/");
+        handleSaveVoiceInterview(messages);
       } else {
         handleGenerateFeedback(messages);
       }

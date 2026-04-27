@@ -98,12 +98,18 @@ const AuthForm = ({ type }: { type: FormType }) => {
   const isSignIn = type === "sign-in";
 
   return (
-    <div className="card-border lg:min-w-[566px]">
-      <div className="flex flex-col gap-6 card py-14 px-10">
-        <div className="flex flex-row gap-2 justify-center">
-          <Image src="/logo.svg" alt="logo" height={32} width={38} />
-          <h2 className="text-primary-100">PrepWise</h2>
-        </div>
+    <div className="card-border lg:min-w-[566px] max-w-full">
+      <div className="flex flex-col gap-6 card py-14 px-10 max-sm:px-6 max-sm:py-8">
+        <Link href="/" className="cursor-pointer flex items-center gap-2">
+          <Image
+            src="/logo.png"
+            width={38}
+            height={38}
+            alt="HireMind AI logo"
+            style={{ borderRadius: "8px" }}
+          />
+          <h1 className="text-26 font-extrabold text-white">HireMind AI</h1>
+        </Link>
 
         <h3>Practice job interviews with AI</h3>
 

@@ -157,6 +157,16 @@ End the conversation on a polite and positive note.
 
 export const feedbackSchema = z.object({
   totalScore: z.number(),
+  maxScore: z.number().optional(),
+  evaluations: z.array(
+    z.object({
+      question: z.string(),
+      answer: z.string(),
+      isCorrect: z.boolean(),
+      isSkipped: z.boolean().optional(),
+      feedback: z.string(),
+    })
+  ).optional(),
   categoryScores: z.tuple([
     z.object({
       name: z.literal("Communication Skills"),
@@ -183,7 +193,7 @@ export const feedbackSchema = z.object({
       score: z.number(),
       comment: z.string(),
     }),
-  ]),
+  ]).optional(),
   strengths: z.array(z.string()),
   areasForImprovement: z.array(z.string()),
   finalAssessment: z.string(),

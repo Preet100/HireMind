@@ -1,4 +1,5 @@
 import { Toaster } from "sonner";
+import { Toaster as HotToaster } from "react-hot-toast";
 import type { Metadata } from "next";
 import { Mona_Sans } from "next/font/google";
 
@@ -10,8 +11,8 @@ const monaSans = Mona_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "PrepWise",
-  description: "An AI-powered platform for preparing for mock interviews",
+  title: "HireMind AI",
+  description: "Mock Interview Application",
 };
 
 export default function RootLayout({
@@ -25,6 +26,22 @@ export default function RootLayout({
         {children}
 
         <Toaster />
+        <HotToaster 
+          position="top-center" 
+          toastOptions={{
+            duration: 3000,
+            style: {
+              background: '#333',
+              color: '#fff',
+            },
+            success: {
+              duration: 3000,
+            },
+            error: {
+              duration: 4000,
+            },
+          }}
+        />
       </body>
     </html>
   );

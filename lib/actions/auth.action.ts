@@ -130,3 +130,16 @@ export async function isAuthenticated() {
   const user = await getCurrentUser();
   return !!user;
 }
+
+// Get user by ID
+export async function getUserById(userId: string): Promise<User | null> {
+  if (!userId) return null;
+  try {
+    const userRecord = await db.collection("users").doc(userId).get();
+    if (!userRecord.exists) return null;
+    return { ...userRecord.data(), id: userRecord.id } as User;
+  } catch (error) {
+    console.error("Error fetching user by ID:", error);
+    return null;
+  }
+}
